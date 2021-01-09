@@ -10,9 +10,10 @@ import (
 )
 func main(){
     r := mux.NewRouter()
+    r.HandleFunc("/credit-assignment", CreditAssignment)
     PORT := os.Getenv("PORT")
     if err := http.ListenAndServe(":"+PORT, r); err != nil {
-        fmt.Println("Error Iniciando Servidor", err)
+        fmt.Println("Server Error", err)
         return
     }
 }
