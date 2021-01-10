@@ -12,6 +12,7 @@ import (
 func main(){
     r := mux.NewRouter()
     r.HandleFunc("/credit-assignment", CreditAssignment)
+    r.HandleFunc("/statistics", InvestmentStatistics).Methods("POST")
     PORT := os.Getenv("PORT")
     log.Println("Serves is alive in port:"+PORT)
     if err := http.ListenAndServe(":"+PORT, r); err != nil {
