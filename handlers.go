@@ -41,7 +41,6 @@ func CreditAssignment(w http.ResponseWriter, r *http.Request){
     }
     credit_700, credit_500, credit_300, credit_err := invest.Assign()
     if credit_err != nil {
-        log.Println(credit_err)
         w.WriteHeader(http.StatusBadRequest)
         return
     }
