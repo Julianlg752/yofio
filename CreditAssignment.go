@@ -14,12 +14,6 @@ type Invest struct {
     Successful int
 }
 
-type CreditAssign struct {
-    Credito700 int32
-    Credito500 int32
-    credito300 int32
-}
-
 var OK = 1
 var ERROR = 0
 type CreditAssigner interface {
@@ -84,14 +78,16 @@ func (i Invest) Assign() (int32, int32, int32, error) {
     return int32(total_creditos[700]), int32(total_creditos[500]), int32(total_creditos[300]), nil
 }
 
-func SaveInvestment(query string) {
+func SaveInvestment(query string) error {
     db_connection, db_err := connection()
     if db_err != nil {
         log.Println(db_err)
+        return db_err
     }
     _, result_err := db_connection.Exec(query)
     if result_err != nil {
-            log.Println("result_err: ", result_err)
+        log.Println("result_err: ", result_err)
+        return result_err
     }
-
+    return nil
 }
