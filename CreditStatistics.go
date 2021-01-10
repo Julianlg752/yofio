@@ -7,6 +7,10 @@ import (
 
 
 func Statistics(invest_list []Invest) string {
+    if len(invest_list) < 1 {
+        response := fmt.Sprintf("{\"Error\": \"Not enough data\"}")
+        return response
+    }
     total_operation := len(invest_list)
     total_fail := 0
     total_done := 0
