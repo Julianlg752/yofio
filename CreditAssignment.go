@@ -2,11 +2,11 @@
 package main
 
 import (
-	"errors"
-	"fmt"
-	"log"
-	"math"
-	"sort"
+    "errors"
+    "fmt"
+    "log"
+    "math"
+    "sort"
 )
 
 type Invest struct {
@@ -21,51 +21,51 @@ type CreditAssigner interface {
 }
 
 func (i Invest) Assign() (int32, int32, int32, error) {
-	creditos := []int{700, 500, 300}
-	inversion := int(i.Investment)
-	cantidad_credito := 0
-	total_creditos := make(map[int]int)
-	rotation := 0
-	temp := creditos
-	cont := 0
+    creditos := []int{700, 500, 300}
+    inversion := int(i.Investment)
+    cantidad_credito := 0
+    total_creditos := make(map[int]int)
+    rotation := 0
+    temp := creditos
+    cont := 0
     tries := 0
-	for {
-		if inversion == 0 {
-			break
-		}else {
-			cantidad_credito++
-			for i := range creditos {
-				credito := creditos[i]
-				inversion = inversion - credito
-				total_creditos[credito] = cantidad_credito
-				if inversion == 0 {
-					break
-				}
-				if math.Signbit(float64(inversion)) {
+    for {
+        if inversion == 0 {
+            break
+        }else {
+            cantidad_credito++
+            for i := range creditos {
+                credito := creditos[i]
+                inversion = inversion - credito
+                total_creditos[credito] = cantidad_credito
+                if inversion == 0 {
+                    break
+                }
+                if math.Signbit(float64(inversion)) {
                     inversion = inversion + credito
                     if tries == len(creditos) {
-					    total_creditos[-1] = -1
-					    inversion = 0
-					    break
+                        total_creditos[-1] = -1
+                        inversion = 0
+                        break
                     }
                     tries++
-				}
-			}
-			var newarray []int
-			for i := 0; i <= rotation; i++ {
-				newarray = temp[1:len(creditos)]
-				newarray = append(newarray, temp[0])
-				temp = newarray
-			}
-			if cont == 3 {
-				sort.Ints(temp)
-				rotation++
-			}
-			creditos = temp
-			cont++
+                }
+            }
+            var newarray []int
+            for i := 0; i <= rotation; i++ {
+                newarray = temp[1:len(creditos)]
+                newarray = append(newarray, temp[0])
+                temp = newarray
+            }
+            if cont == 3 {
+                sort.Ints(temp)
+                rotation++
+            }
+            creditos = temp
+            cont++
 
-		}
-	}
+        }
+    }
     for k  := range total_creditos {
         if k == -1 {
             query := fmt.Sprintf("INSERT INTO investment values(%d,%d)",i.Investment, ERROR)
