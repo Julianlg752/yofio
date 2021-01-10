@@ -2,12 +2,12 @@
 package main
 
 import (
-	"database/sql"
-	"errors"
-	"fmt"
-	"os"
+    "database/sql"
+    "errors"
+    "fmt"
+    "os"
 
-	_ "github.com/go-sql-driver/mysql"
+    _ "github.com/go-sql-driver/mysql"
 )
 
 func connection() (*sql.DB, error) {
