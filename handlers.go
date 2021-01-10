@@ -27,5 +27,6 @@ func CreditAssignment(w http.ResponseWriter, r *http.Request){
         return
     }
     fmt.Println(invest.Investment)
+    fmt.Println(invest.Assign())
     fmt.Fprintf(w, "ping")
 }
