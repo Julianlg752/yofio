@@ -9,8 +9,9 @@ import (
 
     _ "github.com/go-sql-driver/mysql"
 )
-
-func connection() (*sql.DB, error) {
+//Connection
+// Connect to the database in mysql and return the connection
+func Connection() (*sql.DB, error) {
     dbUser := os.Getenv("DB_USER")
     dbPassword := os.Getenv("DB_PASSWORD")
     dbName := os.Getenv("DB_NAME")

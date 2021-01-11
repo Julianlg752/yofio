@@ -7,7 +7,7 @@ import (
 )
 
 func TestNoEnvConnection(t *testing.T) {
-    _, db_err := connection()
+    _, db_err := Connection()
     if db_err != nil {
         t.Errorf("Error connecting to the Database: %s", db_err.Error())
     }
@@ -17,7 +17,7 @@ func TestConnection(t *testing.T) {
     os.Setenv("DB_USER", "yofio_user")
     os.Setenv("DB_PASSWORD", "2021Yofio.5347")
     os.Setenv("DB_NAME", "yofio")
-    _, db_err := connection()
+    _, db_err := Connection()
     if db_err != nil {
         t.Errorf("Error connecting to the Database: %s", db_err.Error())
     }

@@ -8,7 +8,7 @@ import (
     "math"
     "sort"
 )
-
+//Invest struct represent the amount of the investment also is used to get the Data from the Database
 type Invest struct {
     Investment int32
     Successful int
@@ -20,6 +20,12 @@ type CreditAssigner interface {
     Assign(int32) (int32, int32, int32, error)
 }
 
+//Assign
+// This function use the investmnent and assing this to a diferent credits
+// that are located in 700, 500, 300 
+// Iterate hover the all possible combinations to determine which one is the correct and check that the all investment 
+// was used. Then return the size of the credits if was possible or return an error if couldn't proccess the investment.
+// Also save The result in the database to generate the statistics
 func (i Invest) Assign() (int32, int32, int32, error) {
     creditos := []int{700, 500, 300}
     inversion := int(i.Investment)
@@ -63,7 +69,6 @@ func (i Invest) Assign() (int32, int32, int32, error) {
             }
             creditos = temp
             cont++
-
         }
     }
     for k  := range total_creditos {
@@ -78,8 +83,10 @@ func (i Invest) Assign() (int32, int32, int32, error) {
     return int32(total_creditos[700]), int32(total_creditos[500]), int32(total_creditos[300]), nil
 }
 
+//SaveInvestment
+// This function recives a query and sent it to the database to save the result of the investment
 func SaveInvestment(query string) error {
-    db_connection, db_err := connection()
+    db_connection, db_err := Connection()
     if db_err != nil {
         log.Println(db_err)
         return db_err
@@ -89,5 +96,6 @@ func SaveInvestment(query string) error {
         log.Println("result_err: ", result_err)
         return result_err
     }
+    db_connection.Close()
     return nil
 }

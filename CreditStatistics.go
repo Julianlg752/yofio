@@ -5,7 +5,10 @@ import (
     "fmt"
 )
 
-
+//Statistics 
+// This function receives a collection of data from the database represented in a struct @Invest
+// And apply the operations to get the statistics and return a JSON with it also validate the size of the collections
+// and if less than 1 return a message that indicate that is not enough data. 
 func Statistics(invest_list []Invest) string {
     if len(invest_list) < 1 {
         response := fmt.Sprintf("{\"Error\": \"Not enough data\"}")
@@ -33,9 +36,12 @@ func Statistics(invest_list []Invest) string {
     return response
 }
 
+
+//GetInvestments
+// Get all the investment processed from the database and return it in a collection of Invest.
 func GetInvestments() ([]Invest, error) {
     var investment_list []Invest
-    db_connection, db_err := connection()
+    db_connection, db_err := Connection()
     if db_err != nil {
         return investment_list, db_err
     }
@@ -52,5 +58,6 @@ func GetInvestments() ([]Invest, error) {
         }
         investment_list = append(investment_list, Invest{ Investment: investment, Successful: successful})
     }
+    db_connection.Close()
     return investment_list, nil
 }

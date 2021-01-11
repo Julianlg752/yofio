@@ -8,7 +8,9 @@ import (
     "log"
     "net/http"
 )
-
+//InvestStatistics
+// Handler to recive the request by POST and return a JSON if could get the statistics,
+// or return InternalServerError if something wrong happend
 func InvestmentStatistics(w http.ResponseWriter, r *http.Request){
     investment_list, investment_err := GetInvestments()
     if investment_err != nil {
@@ -20,6 +22,10 @@ func InvestmentStatistics(w http.ResponseWriter, r *http.Request){
     fmt.Fprintf(w, statistics)
 }
 
+//CreditAssignment
+// Handler to recive the body in format JSON to proccess with the amount of the investment 
+// validate if the JSON has a correct format and save in a struct and sent it to a 
+// Assign function that generate the amount of credits
 func CreditAssignment(w http.ResponseWriter, r *http.Request){
     body := r.Body
     rbody, bodyErr := ioutil.ReadAll(body)
