@@ -17,20 +17,26 @@ func Statistics(invest_list []Invest) string {
     total_operation := len(invest_list)
     total_fail := 0
     total_done := 0
+    sum_sucesfull := 0
+    sum_fail := 0
     avg_sucesfull := 0
     avg_fail := 0
     for i  := range invest_list {
         invest := invest_list[i]
         if invest.Successful == 1 {
-            avg_sucesfull += int(invest.Investment)
+            sum_sucesfull += int(invest.Investment)
             total_done++
         }else {
-            avg_fail += int(invest.Investment)
+            sum_fail += int(invest.Investment)
             total_fail++
         }
     }
-    avg_sucesfull = avg_sucesfull / total_done
-    avg_fail = avg_fail / total_fail
+    if total_done != 0 {
+        avg_sucesfull = sum_sucesfull / total_done
+    }
+    if total_fail != 0 {
+        avg_fail = sum_fail / total_fail
+    }
     response := fmt.Sprintf("{\"total_assignations\":%d, \"total_successful_assignations\":%d, \"total_no_successful_assingations\":%d, \"avg_successful_invest\":%d, \"avg_no_successful_invest\":%d}",
                 total_operation, total_done, total_fail, avg_sucesfull, avg_fail)
     return response
