@@ -30,6 +30,11 @@ func main(){
     r.HandleFunc("/credit-assignment", CreditAssignment)
     r.HandleFunc("/statistics", InvestmentStatistics).Methods("POST")
     PORT := os.Getenv("PORT")
+    if PORT == "" {
+        log.Println("Invalid PORT, please update the file run.sh")
+        log.Println("Add line: export PORT=8000")
+        return
+    }
     log.Println("Serves is alive in port:"+PORT)
     if err := http.ListenAndServe(":"+PORT, r); err != nil {
         fmt.Println("Server Error", err)
