@@ -27,6 +27,7 @@ import (
 //      total_operation, successful_operations, failed_operations, avg_successful_investment, avg_no_successful_investment
 func main(){
     r := mux.NewRouter()
+    r.HandleFunc("/", Ping)
     r.HandleFunc("/credit-assignment", CreditAssignment)
     r.HandleFunc("/statistics", InvestmentStatistics).Methods("POST")
     PORT := os.Getenv("PORT")

@@ -8,6 +8,13 @@ import (
     "log"
     "net/http"
 )
+
+//Pong
+// Check if the server is alive
+func Ping(w http.ResponseWriter, r *http.Request){
+    fmt.Fprintf(w, "PONG")
+}
+
 //InvestStatistics
 // Handler to recive the request by POST and return a JSON if could get the statistics,
 // or return InternalServerError if something wrong happend
