@@ -48,20 +48,3 @@ curl --location --request GET 'localhost:8000/' \
 ```sh
 curl --location --request POST 'localhost:8000/statistics'
 ```
-# Pruebas en Servidor
-## /
-```sh
-curl --location --request POST 'http://35.223.78.53:8000/'
-```
-
-## /credit-assignment
-```sh
-curl --location --request POST 'http://35.223.78.53:8000/credit-assignment' \
---header 'Content-Type: text/plain' \
---data-raw '{"investment": 3000}'
-```
-
-## /statistics
-```sh
-curl --location --request POST 'http://35.223.78.53:8000/statistics'
-```
